@@ -1,4 +1,4 @@
-# demp-springboot
+# springboot-example
 
 # Build docker image
 
