@@ -3,40 +3,32 @@ package com.example.demo.controller;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import com.example.demo.controller.api.HelloApi;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(DemoConstants.BASE_URL)
-public class HelloController {
+public class HelloController implements HelloApi {
 
-	@GetMapping("hello")
+	@Override
 	public String hello() {
-		
 		return "Hello";
 	}
 	
-	@GetMapping
+	@Override
 	public String defaultMethod() {
 		return "Welcome to Springboot demo Project";
 	}
 
-	@GetMapping("test")
+	@Override
 	public String test() throws UnknownHostException {
-		String hostAddr = "empty";
 		InetAddress ip = InetAddress.getLocalHost();
-		hostAddr ="My IP address is: "+ ip.getHostAddress();
+		String hostAddr = "My IP address is: " + ip.getHostAddress();
 		System.out.print(hostAddr);
 		return hostAddr;
 	}
 	
-	
-	@GetMapping("{id}")
-	@ResponseBody
-	public String getEmployeesById(@PathVariable String id) {
-	    return "ID: " + id;
+	@Override
+	public String getEmployeesById(String id) {
+		return "ID: " + id;
 	}
 }
